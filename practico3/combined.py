@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import sys
 from math import lcm
 import matplotlib.pyplot as plt
