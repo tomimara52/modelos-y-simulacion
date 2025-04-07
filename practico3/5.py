@@ -7,7 +7,7 @@ def monte_carlo(n: int, f: Callable[..., float], n_args: int = 1) -> float:
     summation = 0
 
     for _ in range(n):
-        summation += f(uniform())
+        summation += f(*(uniform() for _ in range(n_args)))
 
     return summation / n
 
