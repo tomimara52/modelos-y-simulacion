@@ -14,6 +14,7 @@ def combined(seed, a1, c1, M1, a2, c2, M2, M, add=1):
     y = seed
     gen_x = [seed]
     gen_y = [seed]
+    gen_pairs = [(seed, seed)]
 
     plot_x = []
     plot_y = []
@@ -28,13 +29,12 @@ def combined(seed, a1, c1, M1, a2, c2, M2, M, add=1):
         y = (a2*y + c2) % M2
 
         # if the pair (x, y) was seen previously then the z generator is going to start repeating
-        repeated = [i for i, (x_e, y_e) in enumerate(zip(gen_x, gen_y)) if x_e == x and y_e == y]
-
-        if len(repeated) > 0:
+        if (x, y) in gen_pairs:
             break
 
         gen_x.append(x)
         gen_y.append(y)
+        gen_pairs.append((x, y))
 
         z = (x + add * y) % M
         
