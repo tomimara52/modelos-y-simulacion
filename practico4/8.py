@@ -2,6 +2,7 @@
 from numpy.random import uniform
 from math import exp, factorial
 
+
 def prob_X(k: int, l: float, i: int) -> float:
     if i < 0 or i > k:
         return 0
