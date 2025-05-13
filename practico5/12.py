@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from numpy.random import uniform
-from math import log, factorial, exp
+from math import log
 
 
 def exponential(l: float) -> float:
