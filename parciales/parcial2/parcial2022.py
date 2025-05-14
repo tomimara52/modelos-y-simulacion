@@ -91,7 +91,7 @@ def moneda_rechazo() -> float:
     while True:
         Y = geométrica(1/3)
         U = uniform()
-        if Y != 1 and U < 0.5 + pow(2, 1 -Y):
+        if Y != 1 and U < 0.5 + pow(2, 1 - Y):
             return Y
 
 
