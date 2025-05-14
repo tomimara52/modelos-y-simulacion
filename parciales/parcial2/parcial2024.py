@@ -57,8 +57,8 @@ print(f'Estimación de P(X > 4): {gt_4 / n_sims}')
 # Ejercicio 3
 
 def hot_dog(T: float) -> tuple[int, list[float]]:
-    interv = [1, 6, 8, 9] # 0 <= T <= 9
-    lamda  = [10, 20, 18, 12]
+    interv = [1, 2, 6, 8, 9] # 0 <= T <= 9
+    lamda  = [10, 15, 20, 18, 14]
     lambda_t = lambda t: 5 + 5*t if t < 3 else 20 if t <= 5 else 30 - 2*t
     j = 0 
     t = -log ( 1 - uniform() ) / lamda[j]
