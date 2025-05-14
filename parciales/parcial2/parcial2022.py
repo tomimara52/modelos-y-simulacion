@@ -40,3 +40,47 @@ for _ in range(10_000):
     if transformada_inversa() <= 1:
         less_than_1 += 1
 print(f'Estimación de P(X <= 1) = {less_than_1 / 10_000}')
+
+
+
+print('---------- Ejercicio 3 ----------')
+
+def aceptaction_rechazo() -> float:
+    while True:
+        Y = 2 * uniform() - 1
+        U = uniform()
+        if U < 1 - Y * Y:
+            return Y
+
+
+print('P(X > 0) = 0.5')
+
+gt_0 = 0
+for _ in range(10_000):
+    if aceptaction_rechazo() > 0:
+        gt_0 += 1
+print(f'Estimación de P(X > 0): {gt_0 / 10_000}')
+
+
+
+print('---------- Ejercicio 4 ----------')
+
+def tirar_moneda(p: float) -> float:
+    n = 1
+    prev_cara = uniform() < p
+
+    while True:
+        n += 1
+        cara = uniform() < p
+        if cara != prev_cara:
+            return n
+        prev_cara = cara
+
+
+print(f'P(X = 4) = {10 / 3 ** 4}')
+
+eq_4 = 0
+for _ in range(100_000):
+    if tirar_moneda(1/3) == 4:
+        eq_4 += 1
+print(f'Estimación de P(X = 4): {eq_4 / 100_000}')
