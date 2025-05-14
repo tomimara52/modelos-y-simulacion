@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from math import log, exp, inf, sqrt
+from math import log, exp, inf, pow
 from numpy.random import uniform
 from scipy.integrate import quad
 
@@ -77,10 +77,34 @@ def tirar_moneda(p: float) -> float:
         prev_cara = cara
 
 
+def geométrica(p: float) -> float:
+    n = 1
+    success = uniform() < p
+    while not success:
+        n += 1
+        success = uniform() < p
+    
+    return n
+
+
+def moneda_rechazo() -> float:
+    while True:
+        Y = geométrica(1/3)
+        U = uniform()
+        if Y != 1 and U < 0.5 + pow(2, 1 -Y):
+            return Y
+
+
 print(f'P(X = 4) = {10 / 3 ** 4}')
 
 eq_4 = 0
 for _ in range(100_000):
     if tirar_moneda(1/3) == 4:
         eq_4 += 1
-print(f'Estimación de P(X = 4): {eq_4 / 100_000}')
+print(f'Estimación de P(X = 4) simulando tiradas de moneda: {eq_4 / 100_000}')
+
+eq_4 = 0
+for _ in range(100_000):
+    if moneda_rechazo() == 4:
+        eq_4 += 1
+print(f'Estimación de P(X = 4) con aceptación rechazo: {eq_4 / 100_000}')
