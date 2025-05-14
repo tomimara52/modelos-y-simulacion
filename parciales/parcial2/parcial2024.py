@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from numpy.random import uniform
-from math import pow, sqrt, log, exp, factorial
+from math import pow, sqrt, log 
 from scipy.integrate import quad
 
 # Ejercicio 1
