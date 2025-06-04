@@ -27,15 +27,6 @@ def lambda_t(t: float) -> float:
         return 19 - 3 * (x - 5)
 
 
-def get_jobs_before(t: float, jobs: list[float]) -> list[float]:
-    i = 0
-
-    while i < len(jobs) and jobs[i] <= t:
-        i += 1
-
-    return jobs[:i]
-
-
 def simulate_server(T: float, debug: bool = False) -> tuple[float, float]:
     job_events = poisson_process(T, 19, lambda_t)
 
@@ -44,11 +35,10 @@ def simulate_server(T: float, debug: bool = False) -> tuple[float, float]:
 
     time = 0
     total_sleep_time = 0
+    next_job = 0
 
-    while job_events != []:
-        programmed_jobs = get_jobs_before(time, job_events)
-
-        if programmed_jobs == []:
+    while next_job < len(job_events):
+        if job_events[next_job] > time:
             # sleep
             sleep_time = uniform() * 0.3
 
@@ -58,16 +48,14 @@ def simulate_server(T: float, debug: bool = False) -> tuple[float, float]:
             time += sleep_time
             total_sleep_time += sleep_time
         else:
-            for _ in range(len(programmed_jobs)):
-                # service time
-                work_time = -log(uniform()) / 25
+            # service time
+            work_time = -log(uniform()) / 25
 
-                if debug:
-                    print(f"Work from {time} to {time + work_time}")
+            if debug:
+                print(f"Work from {time} to {time + work_time}")
 
-                time += work_time
-
-            job_events = job_events[len(programmed_jobs) :]
+            time += work_time
+            next_job += 1
 
     return time, total_sleep_time
 
