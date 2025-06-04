@@ -85,7 +85,7 @@ print(
 )
 
 
-# lógica para hacer que los bins vayan en incrementos de medio segundo
+# lógica para hacer que los bins vayan en incrementos de media hora
 min_sleep_time = min(sleep_times)
 max_sleep_time = max(sleep_times)
 lower_edge = (
