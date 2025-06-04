@@ -27,7 +27,7 @@ def lambda_t(t: float) -> float:
         return 19 - 3 * (x - 5)
 
 
-def simulate_server(T: float, debug: bool = False) -> tuple[float, float]:
+def simulate_server(T: float, debug: bool = False) -> float:
     job_events = poisson_process(T, 19, lambda_t)
 
     if debug:
@@ -57,7 +57,14 @@ def simulate_server(T: float, debug: bool = False) -> tuple[float, float]:
             time += work_time
             next_job += 1
 
-    return time, total_sleep_time
+    # add sleep time if finished all jobs before T
+    if time < T:
+        total_sleep_time += T - time
+
+        if debug:
+            print(f"Sleep from {time} to {T}")
+
+    return total_sleep_time
 
 
 def estimate_sleep_time(T: float, n_sims: int) -> tuple[float, list[float]]:
@@ -65,7 +72,7 @@ def estimate_sleep_time(T: float, n_sims: int) -> tuple[float, list[float]]:
     sleep_times = []
 
     for _ in range(n_sims):
-        _, sleep_time = simulate_server(T)
+        sleep_time = simulate_server(T)
         acc += sleep_time
         sleep_times.append(sleep_time)
 
