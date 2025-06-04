@@ -109,7 +109,7 @@ while i <= upper_edge:
 _, bins, _ = plt.hist(sleep_times, bins=bin_edges, color="skyblue", edgecolor="black")
 plt.xticks(bins, [f"{edge:.1f}" for edge in bins], rotation=50, fontsize=8)
 plt.title("Histograma de tiempos detenido en las primeras 100 horas")
-plt.xlabel("Tiempo en segundos")
+plt.xlabel("Tiempo en horas")
 plt.ylabel("Frecuencia")
 
 plt.savefig("histograma.png", dpi=300, bbox_inches="tight")
