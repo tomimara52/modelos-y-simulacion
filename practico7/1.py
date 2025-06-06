@@ -30,7 +30,7 @@ def pearson_p(
     for i in range(len(probabilities)):
         T += (N_list[i] - n * probabilities[i]) ** 2 / (n * probabilities[i])
 
-    return (1 - chi2.cdf(T, len(probabilities) - 1)).tolist()
+    return chi2.sf(T, len(probabilities) - 1).tolist()
 
 
 def estimate_p(
