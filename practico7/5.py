@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from scipy.stats import binom, chi2
 import numpy as np
-from math import comb
 
 
 """
