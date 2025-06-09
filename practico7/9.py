@@ -35,4 +35,26 @@ for _ in range(n_sims):
         bigger_than_d += 1
 
 
-print(f"p-valor: {bigger_than_d / n_sims}")
+print(f"p-valor simulando uniformes: {bigger_than_d / n_sims}")
+
+
+bigger_than_d = 0
+
+for _ in range(n_sims):
+    exponentials = np.sort(expon.rvs(size=sample_size, scale=estimated_scale))
+
+    sim_scale = np.mean(exponentials)
+
+    d_j = -np.inf
+
+    for i, x in enumerate(exponentials):
+        j = i + 1
+        f = np.float64(expon.cdf(x=x, scale=sim_scale))
+
+        d_j = max(d_j, j / sample_size - f, f - (j - 1) / sample_size)
+
+    if d_j >= d:
+        bigger_than_d += 1
+
+
+print(f"p-valor simulando exponenciales: {bigger_than_d / n_sims}")

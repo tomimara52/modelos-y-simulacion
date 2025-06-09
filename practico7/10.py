@@ -38,4 +38,28 @@ for _ in range(n_sims):
         bigger_than_d += 1
 
 
-print(f"p-valor: {bigger_than_d / n_sims}")
+print(f"p-valor simulando uniformes: {bigger_than_d / n_sims}")
+
+
+bigger_than_d = 0
+
+for _ in range(n_sims):
+    normals = np.sort(
+        norm.rvs(size=sample_size, loc=estimated_mean, scale=estimated_std)
+    )
+
+    sim_mean = np.mean(normals)
+    sim_std = np.std(normals, ddof=1)
+
+    d_j = -np.inf
+
+    for i, x in enumerate(normals):
+        j = i + 1
+        f = np.float64(norm.cdf(x=x, loc=sim_mean, scale=sim_std))
+
+        d_j = max(d_j, j / sample_size - f, f - (j - 1) / sample_size)
+
+    if d_j >= d:
+        bigger_than_d += 1
+
+print(f"p-valor simulando normales: {bigger_than_d / n_sims}")
