@@ -85,7 +85,7 @@ def monte_carlo(z_alpha_2, semi_length, fixed_iterations=None):
     mean = f(uniform.rvs())
     s2 = 0
 
-    while n < 100 or sqrt(s2 / n) >= d:
+    while n < 100 or sqrt(s2 / n) >= d or not fixed_iterations is None:
         next_mean = mean + (f(uniform.rvs()) - mean) / (n + 1)
         s2 = (1 - 1 / n) * s2 + (n + 1) * (next_mean - mean) ** 2
         mean = next_mean
