@@ -49,7 +49,7 @@ print(
 
 # ejercicio 3d
 
-t0 = 0.22111789428006534
+t0 = 3.0181185228436624 
 p0 = 0.217
 n_simulations = 10_000
 bigger_than_t0 = 0
